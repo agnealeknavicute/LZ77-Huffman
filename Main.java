@@ -222,10 +222,7 @@ public class Main {
               LINE+=element+",";
             }
           }
-        } else if(line_element_count<20) {
-          LINE+=linee;
-          line_element_count++;
-        }
+        } 
       } while (continue_comp);
       System.out.println("BROKE");
       

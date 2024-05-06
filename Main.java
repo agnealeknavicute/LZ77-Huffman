@@ -203,6 +203,8 @@ public class Main {
           for (int l = 0; l < Split_to_symbols.length; l++) {
             System.out.print(string_done_split[l] + " ");
           }
+          
+          
 
           int[] int_done_split = new int[Split_to_symbols.length];
           for (int j = 0; j < Split_to_symbols.length; j++) {
@@ -253,6 +255,56 @@ public class Main {
       return;
     }
   }
+
+  /////////////////////////////////////////////////////////////////////
+
+  public static void Huffman_coding_comp(String filename) {
+    System.out.println("File to comp using Huffman coding is " + filename);
+
+    File f = new File(filename);
+    if (!f.exists()) {
+      System.out.println("No such a file exsists");
+      return;
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////
+
+  public static void Huffman_coding_decomp(String filename) {
+    System.out.println("File to decomp using Huffman coding is " + filename);
+
+    File f = new File(filename);
+    if (!f.exists()) {
+      System.out.println("No such a file exsists");
+      return;
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////
+
+  public static void Deflate_comp(String filename) {
+    System.out.println("File to comp using Deflate is " + filename);
+
+    File f = new File(filename);
+    if (!f.exists()) {
+      System.out.println("No such a file exsists");
+      return;
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////
+
+  public static void Deflate_decomp(String filename) {
+    System.out.println("File to decomp using Deflate is " + filename);
+
+    File f = new File(filename);
+    if (!f.exists()) {
+      System.out.println("No such a file exsists");
+      return;
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////
 
   public static void exit() {
     System.out.println("Exiting...");

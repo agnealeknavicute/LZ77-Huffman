@@ -1,6 +1,4 @@
-// import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// import org.junit.jupiter.api.Test;
 import java.util.Scanner;
 
 import java.io.File;
@@ -101,15 +99,10 @@ public class Main {
     try {
       BufferedReader br = new BufferedReader(new FileReader(filename));
       String line;
-      int amout_of_symbols = 0, current_read = 0;
+      int amout_of_words=0, amout_of_symbols = 0, current_read = 0;
       while ((line = br.readLine()) != null) {
-        // String[] split_to_words=line.split(" ");
-        // for (String word : split_to_words) {
-        // String[] word_split_in_letters=word.split("");
-        // for (String symbol : word_split_in_letters) {
-        // amout_of_symbols++;
-        // }
-        // }
+        String[] split_to_words=line.split(" ");
+        amount_of_words+=split_to_words.length;
         String[] split_to_symbols = line.split("");
         for (String symbol : split_to_symbols) {
           amout_of_symbols++;
@@ -120,14 +113,12 @@ public class Main {
 
       FileInputStream fin = new FileInputStream(filename);
       FileOutputStream fout = new FileOutputStream("LZ77_" + filename);
-      System.out.println(" File context ///////////////////////////////////////////////");
       System.out.println(fin);
       String LINE = "";
       int wrote_to_line = 0, line_element_count = 0;
-      System.out.println("end of///////////////////////////////////////////////");
+      
       int i = 0, k;
       boolean continue_comp = true;
-      // byte mas[] = new byte[20];
       byte mas[] = new byte[1];
       do {
         k = fin.read(mas);
@@ -141,7 +132,7 @@ public class Main {
           wrote_to_line++;
           LINE += String.valueOf(mas[i]);
         } else {
-          LINE += "," + String.valueOf(mas[i]);
+          LINE += ";" + String.valueOf(mas[i]);
         }
         System.out.print("[" + mas[i] + "] ");
 
@@ -149,7 +140,7 @@ public class Main {
           System.out.println("LINE IS " + LINE);
           /////////////////////////////////////////////////////////////////////////////////////////
           String neww = "", symbol_updated;
-          String[] split_to_symbols1 = LINE.split(",");
+          String[] split_to_symbols1 = LINE.split(";");
           for (String symbol : split_to_symbols1) {
             String binarry = Integer.toBinaryString(Integer.valueOf(symbol));
             while (binarry.length() < 8) {
@@ -162,22 +153,22 @@ public class Main {
             neww += (String.valueOf(character));
           }
 
-          String[] split_to_symbols2 = neww.split(",");
+          String[] split_to_symbols2 = neww.split(";");
           int for_print_index = 0;
           String print_search_buffer = "", print_look_ahead_buffer = "";
           for (String symbols : split_to_symbols2) {
             for_print_index++;
             if (for_print_index < 13) {
-              print_search_buffer += symbols + ",";
+              print_search_buffer += symbols + ";";
             } else {
-              print_look_ahead_buffer += symbols + ",";
+              print_look_ahead_buffer += symbols + ";";
             }
           }
           System.out.println("print_search_buffer: " + print_search_buffer);
           System.out.println("print_look_ahead_buffer: " + print_look_ahead_buffer);
           /////////////////////////////////////////////////////////////////////////////////////////
 
-          String[] Split_to_symbols = LINE.split(",");
+          String[] Split_to_symbols = LINE.split(";");
           int Index = 0, search_buffer_index = 0, look_ahead_buffer_index = 0;
           String Search_buffer = "", Look_ahead_buffer = "";
           for (String Symbols : Split_to_symbols) {
@@ -187,14 +178,14 @@ public class Main {
                 search_buffer_index++;
                 Search_buffer += Symbols;
               } else {
-                Search_buffer += "," + Symbols;
+                Search_buffer += ";" + Symbols;
               }
             } else {
               if (look_ahead_buffer_index == 0) {
                 look_ahead_buffer_index++;
                 Look_ahead_buffer += Symbols;
               } else {
-                Look_ahead_buffer += "," + Symbols;
+                Look_ahead_buffer += ";" + Symbols;
               }
             }
           }
@@ -228,14 +219,14 @@ public class Main {
 
           // deleting 1 sybmol . moving the window
           line_element_count--;
-          String[] LINE_split = LINE.split(",");
+          String[] LINE_split = LINE.split(";");
           int Changing_line = 0;
           LINE = "";
           for (String element : LINE_split) {
             if (Changing_line == 0) {
               Changing_line++;
             } else {
-              LINE += element + ",";
+              LINE += element + ";";
             }
           }
         }

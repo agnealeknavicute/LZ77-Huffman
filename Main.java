@@ -71,7 +71,7 @@ public class Main {
   }
   /////////////////////////////////////////////////////////////////////
   public static void LZ77_comp (String filename) {
-    System.out.println("Filename is "+filename);
+    System.out.println("File to comp using LZ77 is "+filename);
 
     File f = new File (filename);
     if (!f.exists()) {
@@ -239,6 +239,16 @@ public class Main {
 
   }
   /////////////////////////////////////////////////////////////////////
+
+  public static void LZ77_decomp (String filename) {
+    System.out.println("File to decomp using LZ77 is "+filename);
+
+    File f = new File (filename);
+    if (!f.exists()) {
+      System.out.println("No such a file exsists");
+      return;
+    }
+  }
 
   public static void exit() {
     System.out.println("Exiting...");

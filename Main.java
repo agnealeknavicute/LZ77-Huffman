@@ -61,6 +61,21 @@ public class Main {
         case "LZ77_comp":
           LZ77_comp(rest_of_command);
           break;
+        case "LZ77_decomp":
+          LZ77_decomp(rest_of_command);
+          break;
+        case "Huffman_coding_comp":
+          Huffman_coding_comp(rest_of_command);
+          break;
+        case "Huffman_coding_decomp":
+          Huffman_coding_decomp(rest_of_command);
+          break;
+        case "Deflate_comp":
+          Deflate_comp(rest_of_command);
+          break;
+        case "Deflate_decomp":
+          Deflate_decomp(rest_of_command);
+          break;
         case "exit":
           exit();
           break loop;

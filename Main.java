@@ -112,7 +112,7 @@ public class Main {
       br.close();
 
       FileInputStream fin = new FileInputStream(filename);
-      FileOutputStream fout = new FileOutputStream("LZ77_" + filename);
+      FileOutputStream fout = new FileOutputStream("LZ77_comp_" + filename);
       System.out.println(fin);
       String LINE = "";
       int wrote_to_line = 0, line_element_count = 0;
@@ -290,6 +290,8 @@ public class Main {
       System.out.println("No such a file exsists");
       return;
     }
+    LZ77_comp(filename);
+    Huffman_coding_comp("LZ77_comp_"+filename);
   }
 
   /////////////////////////////////////////////////////////////////////
@@ -302,6 +304,8 @@ public class Main {
       System.out.println("No such a file exsists");
       return;
     }
+    Huffman_coding_decomp(filename);
+    LZ77_decomp("LZ77_decomp_"+filename);
   }
 
   /////////////////////////////////////////////////////////////////////

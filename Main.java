@@ -53,8 +53,8 @@ public class Main {
         case "to_binarry":
           to_binarry(rest_of_command);
           break;
-        case "LZ77":
-          LZ77(rest_of_command);
+        case "LZ77_comp":
+          LZ77_comp(rest_of_command);
           break;
         case "exit":
           exit();
@@ -70,7 +70,7 @@ public class Main {
   public static void to_binarry(String convert_file) {
   }
   /////////////////////////////////////////////////////////////////////
-  public static void LZ77 (String filename) {
+  public static void LZ77_comp (String filename) {
     System.out.println("Filename is "+filename);
 
     File f = new File (filename);

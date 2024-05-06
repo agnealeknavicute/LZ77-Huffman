@@ -107,6 +107,7 @@ public class Main {
       int wrote_to_line=0, line_element_count=0;
       System.out.println("end of///////////////////////////////////////////////");
       int i=0, k;
+      boolean continue_comp=true;
       //byte mas[] = new byte[20];
       byte mas[] = new byte[1];
       do {
@@ -114,7 +115,8 @@ public class Main {
         String linee="";
         current_read+=1;
         if (current_read>=amout_of_symbols) {
-          k=0;
+          //k=0;
+          continue_comp=false;
         }
         if (wrote_to_line==0) {
           wrote_to_line++;
@@ -202,7 +204,7 @@ public class Main {
           for (int l=0; l<Split_to_symbols.length; l++) {
             System.out.print(int_done_split[l]+" ");
           }
-             System.out.println("");
+          System.out.println("");
           for (int element_of_done_split : int_done_split) {
             fout.write(element_of_done_split);
           }
@@ -224,7 +226,7 @@ public class Main {
           LINE+=linee;
           line_element_count++;
         }
-      } while (k != 0);
+      } while (continue_comp);
       System.out.println("BROKE");
       
       fin.close();

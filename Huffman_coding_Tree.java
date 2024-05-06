@@ -2,6 +2,7 @@ import java.util.HashMap;
 import java.util.PriorityQueue;
 
 public class Huffman_coding_Tree {
+    private Node root;
 
     static class Node implements Comparable<Node> {
         byte data;
@@ -33,10 +34,10 @@ public class Huffman_coding_Tree {
         while (pq.size() > 1) {
             Node left = pq.poll();
             Node right = pq.poll();
-            Node parent = new Node((byte) 0, left.frequency + right.frequency);
-            parent.left = left;
-            parent.right = right;
-            pq.add(parent);
+            root = new Node((byte) 0, left.frequency + right.frequency);
+            root.left = left;
+            root.right = right;
+            pq.add(root);
         }
 
     }
@@ -44,7 +45,11 @@ public class Huffman_coding_Tree {
     public void read_Huffman_Tree(byte[] tree) {
     }
 
-    public void printHuffmanTree(Node node) {
+    public void printHuffmanTree() {
+        printHuffmanTree(root);
+    }
+
+    private void printHuffmanTree(Node node) {
         if (node == null) {
             return;
         }

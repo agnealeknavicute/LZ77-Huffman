@@ -106,23 +106,16 @@ public class Main {
       String LINE="";
       int wrote_to_line=0, line_element_count=0;
       System.out.println("end of///////////////////////////////////////////////");
-      int i, k;
+      int i=0, k;
       //byte mas[] = new byte[20];
       byte mas[] = new byte[1];
       do {
-        //System.out.println("[");
         k = fin.read(mas);
         String linee="";
-        //for (i=0; i<k; i++) {
-        i=0;
-        //fout.write(mas[i]);
-        //  if (i==0) current_read+=1;
         current_read+=1;
-        //if (i==(k-1) && current_read>=amout_of_symbols) {
         if (current_read>=amout_of_symbols) {
           k=0;
         }
-        //System.out.print("k="+k+" i="+i+"  and="+mas[i]);
         if (wrote_to_line==0) {
           wrote_to_line++;
           LINE+=String.valueOf(mas[i]);
@@ -130,9 +123,7 @@ public class Main {
         else {
           LINE+=","+String.valueOf(mas[i]);
         }
-          //System.out.print(mas[i]+" ");
-        //}
-        System.out.println("["+mas[i]+"]");
+        System.out.print("["+mas[i]+"] ");
         
         if (line_element_count==20 || current_read==amout_of_symbols) {
           System.out.println("LINE IS "+LINE);
@@ -246,9 +237,7 @@ public class Main {
       return;
     }
 
-
   }
-
   /////////////////////////////////////////////////////////////////////
 
   public static void exit() {

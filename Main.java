@@ -36,45 +36,49 @@ public class Main {
 
     huffmanTree.printHuffmanTree();
     loop: while (true) {
-      String choiceStr = "", choice = "", rest_of_command = "";
-      int i = 0;
-
-      choiceStr = sc.nextLine();
-      // choiceStr="to_binarry test_txt.txt";
-      // choiceStr="LZ77 test_txt.txt";
-      String[] split_choice = choiceStr.split(" ");
-      for (String individual_input : split_choice) {
-        if (i == 0) {
-          choice = individual_input;
-        } else {
-          rest_of_command = individual_input;
-        }
-        i++;
+      System.out.println("\n");
+      String[] commands={"LZ77_comp","LZ77_decomp",  "Huffman_coding_comp","Huffman_coding_decomp",  "Deflate_comp","Deflate_decomp",  "size",  "equal",  "about"};
+      
+      //System.out.println("Commands, Command explenation");
+      System.out.printf("\n%-8s%-23s%-20s", "Number", "Commands", "Command explenation");
+      for (int i=0; i<commands.length; i++) {
+        //System.out.println((i+1)+". "+commands[i]+" - "+commands[i].replace("_"," "));
+        System.out.printf("\n%-8d%-23s%-19s", (i+1), commands[i], commands[i].replace("_"," "));
       }
+      System.out.println();
 
-      // System.out.println("Choice:-"+choice+"-, but resrt of
-      // command:-"+rest_of_command);
+      String choice=sc.next(), rest_of_command="";
+
       switch (choice) {
         case "to_binarry":
           to_binarry(rest_of_command);
           break;
         case "LZ77_comp":
-          LZ77_comp(rest_of_command);
+          LZ77_comp();
           break;
         case "LZ77_decomp":
-          LZ77_decomp(rest_of_command);
+          LZ77_decomp();
           break;
         case "Huffman_coding_comp":
-          Huffman_coding_comp(rest_of_command);
+          Huffman_coding_comp();
           break;
         case "Huffman_coding_decomp":
-          Huffman_coding_decomp(rest_of_command);
+          Huffman_coding_decomp();
           break;
         case "Deflate_comp":
-          Deflate_comp(rest_of_command);
+          Deflate_comp();
           break;
         case "Deflate_decomp":
-          Deflate_decomp(rest_of_command);
+          Deflate_decomp();
+          break;
+        case "size":
+          size();
+          break;
+        case "equal":
+          equal();
+          break;
+        case "about":
+          about();
           break;
         case "exit":
           exit();
@@ -102,8 +106,9 @@ public class Main {
   }
 
   /////////////////////////////////////////////////////////////////////
-  public static void LZ77_comp(String filename) {
-    System.out.println("File to comp using LZ77 is " + filename);
+  public static void LZ77_comp() {
+    System.out.println("Source file name (which will be comp using LZ77):");
+    String filename=sc.next();
 
     File f = new File(filename);
     if (!f.exists()) {
@@ -117,7 +122,7 @@ public class Main {
       int amout_of_words=0, amout_of_symbols = 0, current_read = 0;
       while ((line = br.readLine()) != null) {
         String[] split_to_words=line.split(" ");
-        amount_of_words+=split_to_words.length;
+        amout_of_words+=split_to_words.length;
         String[] split_to_symbols = line.split("");
         for (String symbol : split_to_symbols) {
           amout_of_symbols++;
@@ -261,8 +266,10 @@ public class Main {
   }
   /////////////////////////////////////////////////////////////////////
 
-  public static void LZ77_decomp(String filename) {
-    System.out.println("File to decomp using LZ77 is " + filename);
+  public static void LZ77_decomp() {
+    System.out.println("Archive name (which will be decomp using LZ77):");
+    String filename=sc.next();
+    
 
     File f = new File(filename);
     if (!f.exists()) {
@@ -273,8 +280,9 @@ public class Main {
 
   /////////////////////////////////////////////////////////////////////
 
-  public static void Huffman_coding_comp(String filename) {
-    System.out.println("File to comp using Huffman coding is " + filename);
+  public static void Huffman_coding_comp() {
+    System.out.println("Source file name (which will be comp using Huffman coding):");
+    String filename=sc.next();
 
     File f = new File(filename);
     if (!f.exists()) {
@@ -285,8 +293,9 @@ public class Main {
 
   /////////////////////////////////////////////////////////////////////
 
-  public static void Huffman_coding_decomp(String filename) {
-    System.out.println("File to decomp using Huffman coding is " + filename);
+  public static void Huffman_coding_decomp() {
+    System.out.println("Archive name (which will be decomp using Huffman coding):");
+    String filename=sc.next();
 
     File f = new File(filename);
     if (!f.exists()) {
@@ -297,30 +306,74 @@ public class Main {
 
   /////////////////////////////////////////////////////////////////////
 
-  public static void Deflate_comp(String filename) {
-    System.out.println("File to comp using Deflate is " + filename);
+  public static void Deflate_comp() {
+    System.out.println("Source file name (which will be comp using Deflate):");
+    String filename=sc.next();
 
     File f = new File(filename);
     if (!f.exists()) {
       System.out.println("No such a file exsists");
       return;
     }
-    LZ77_comp(filename);
-    Huffman_coding_comp("LZ77_comp_"+filename);
+    LZ77_comp();
+    Huffman_coding_comp();
   }
 
   /////////////////////////////////////////////////////////////////////
 
-  public static void Deflate_decomp(String filename) {
-    System.out.println("File to decomp using Deflate is " + filename);
+  public static void Deflate_decomp() {
+    System.out.println("Archive name (which will be decomp using Deflate):");
+    String filename=sc.next();
 
     File f = new File(filename);
     if (!f.exists()) {
       System.out.println("No such a file exsists");
       return;
     }
-    Huffman_coding_decomp(filename);
-    LZ77_decomp("LZ77_decomp_"+filename);
+    Huffman_coding_decomp();
+    LZ77_decomp();
+  }
+
+  /////////////////////////////////////////////////////////////////////
+
+  public static void size() {
+    System.out.println("File name:");
+    String filename=sc.next();
+    
+    File f = new File(filename);
+    if (!f.exists()) {
+      System.out.println("No such a file exsists");
+      return;
+    }
+  }
+  /////////////////////////////////////////////////////////////////////
+
+  public static void equal() {
+    System.out.println("First file name:");
+    String first_filename=sc.next();
+    
+    File f1 = new File(first_filename);
+    if (!f1.exists()) {
+      System.out.println("No such a file exsists");
+      return;
+    }
+
+    System.out.println("Second file name:");
+    String second_filename=sc.next();
+    
+    File f2 = new File(second_filename);
+    if (!f2.exists()) {
+      System.out.println("No such a file exsists");
+      return;
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////
+
+  public static void about() {
+    System.out.printf("\n%-19s%-9s%-14s%-8s", "Apliecības numurs", "Vārds", "Uzvārds", "Grupa");
+    System.out.printf("\n%-19s%-9s%-14s%-10s", "231RDB197", "Roberts", "Jansons", "RDBIO 1.");
+    System.out.printf("\n%-19s%-9s%-14s%-10s", "231RDB221", " Agne", "Aleknavičūte", "RDBIO 1.");
   }
 
   /////////////////////////////////////////////////////////////////////

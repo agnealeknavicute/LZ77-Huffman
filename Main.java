@@ -374,7 +374,6 @@ public class Main {
         sorted_shortened_part_middle[index_sorted_shortened_part_middle]=Integer.valueOf(index);
         index_sorted_shortened_part_middle++;
       }
-      for (int i=0; i<)
       
       FileInputStream fin = new FileInputStream(filename);
       FileOutputStream fout = new FileOutputStream("LZ77_decomped_" + filename);
@@ -401,7 +400,8 @@ public class Main {
         }
         System.out.print("[" + mas[i] + "] ");
 
-        if (line_element_count == 100 || current_read == amout_of_symbols) {
+        if (current_read == amout_of_symbols) {
+          continue_comp=false;
           System.out.println("LINE IS " + LINE);
           
           String[] Split_to_symbols = LINE.split(";");
@@ -413,104 +413,20 @@ public class Main {
             string_done_split[index_for_string_done_split] = Symbols;
             index_for_string_done_split++;
           }
-          System.out.println("string_done_split.length=" + string_done_split.length);
-          System.out.println("String[] done:");
-          for (int l = 0; l < Split_to_symbols.length; l++) {
-            System.out.print(string_done_split[l] + " ");
-          }
-
-          //
-          //
-          System.out.println("\nStarting another String[]");
-
-          String[] another_string_done_split = new String[string_done_split.length];
-          another_string_done_split[0]=string_done_split[0];
-          another_string_done_split[1]=string_done_split[1];
-          another_string_done_split[2]=string_done_split[2];
-          System.out.println("\nWrote 0. , 1. , 2. space");
-
-          int writed_index=3;
-          for (int index1=3; index1<string_done_split.length; index1++) {
-            int temp=index1, amount_of_matches=0;
-
-            another_string_done_split[writed_index]=string_done_split[index1];
-            //System.out.println("another_string_done_split["+index1+".]"+ space");
-            String trying_to_replace=string_done_split[index1];
-            String past_elements="", current_reading="";
-            String longest_matching="";
-            int start_of_match=0;
-            boolean first_match=true;
-
-            for (int index2=0; index2<index1; index2++) {
-              current_reading=string_done_split[index2];
-              if ((past_elements+current_reading).equals(trying_to_replace)) {
-                past_elements+=current_reading;
+          
+          int max=string_done_split.length;
+          for (int elements_index=0; i<max; i++) {
+            if (string_done_split[elements_index+1].equals("~")) {
+              int space_back=Integer.valueOf(string_done_split[elements_index]), amount_of_symbols=Integer.valueOf(string_done_split[elements_index+2]);
+              String temp="";
+              for (int restoring=elements_index-space_back; restoring<amount_of_symbols; restoring++) {
+                temp+=string_done_split[restoring];
               }
-              if (past_elements.equals(trying_to_replace)) {
-                longest_matching=past_elements;
-                amount_of_matches++;
-                if (first_match) {
-                  start_of_match=index1-index2;
-                  first_match=false;
-                }
-                if (index1<=string_done_split.length-2) {
-                  index1++;
-                  trying_to_replace+=string_done_split[index1];
-                }
-              }
-            }
-
-            if (amount_of_matches>3) {
-              System.out.println("longest match is "+amount_of_matches+" "+longest_matching);
-              //String replacement="<("+start_of_match+","+amount_of_matches+")>";
-              //String replacement=start_of_match+"126"+amount_of_matches;
-              //another_string_done_split[index1]=replacement;
-              another_string_done_split[writed_index]=""+start_of_match;
-              another_string_done_split[writed_index+1]="126";
-              another_string_done_split[writed_index+2]=""+amount_of_matches;
-              writed_index+=2;
-            } else {
-              index1=temp;
-            }
-            //if (index1<=string_done_split.length-2) writed_index++;
-            writed_index++;
-          }
-
-          System.out.println("\n printing another string list");
-          for (int idkkk=0; idkkk<another_string_done_split.length; idkkk++) {
-            if (another_string_done_split[idkkk]==null) break;
-            System.out.print(another_string_done_split[idkkk]+" ");
-          }
-          System.out.println("\n");
-
-
-          if (continue_comp) {
-            fout.write(Integer.valueOf(another_string_done_split[0]));
-          } else {
-            for (int index=0; index<another_string_done_split.length; index++) {
-              if (another_string_done_split[index]==null) break;
-              fout.write(Integer.valueOf(another_string_done_split[index]));
-            }
-          }
-
-          // deleting 1 sybmol . moving the window
-          line_element_count--;
-          String[] LINE_split = LINE.split(";");
-          int Changing_line = 0;
-          LINE = "";
-          for (String element : LINE_split) {
-            if (Changing_line == 0) {
-              Changing_line++;
-            } else {
-              if (Changing_line==1) {
-                Changing_line++;
-                LINE += element;
-              } else {
-                LINE +=";"+element;
-              }
+              
             }
           }
         }
+          
       } while (continue_comp);
       System.out.println("BROKE");
 
